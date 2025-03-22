@@ -36,7 +36,6 @@ pub const CALL: &<Test as frame_system::Config>::RuntimeCall =
 #[test]
 fn set_lock_with_amount_zero_removes_lock() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, u64::MAX, WithdrawReasons::all());
@@ -48,7 +47,6 @@ fn set_lock_with_amount_zero_removes_lock() {
 #[test]
 fn set_lock_with_withdraw_reasons_empty_removes_lock() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, u64::MAX, WithdrawReasons::all());
@@ -60,7 +58,6 @@ fn set_lock_with_withdraw_reasons_empty_removes_lock() {
 #[test]
 fn basic_locking_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			assert_eq!(Balances::free_balance(1), 10);
@@ -75,7 +72,6 @@ fn basic_locking_should_work() {
 #[test]
 fn account_should_be_reaped() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			assert_eq!(Balances::free_balance(1), 10);
@@ -90,7 +86,6 @@ fn account_should_be_reaped() {
 #[test]
 fn reap_failed_due_to_provider_and_consumer() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			// SCENARIO: only one provider and there are remaining consumers.
@@ -117,7 +112,6 @@ fn reap_failed_due_to_provider_and_consumer() {
 #[test]
 fn partial_locking_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 5, WithdrawReasons::all());
@@ -128,7 +122,6 @@ fn partial_locking_should_work() {
 #[test]
 fn lock_removal_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, u64::MAX, WithdrawReasons::all());
@@ -140,7 +133,6 @@ fn lock_removal_should_work() {
 #[test]
 fn lock_replacement_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, u64::MAX, WithdrawReasons::all());
@@ -152,7 +144,6 @@ fn lock_replacement_should_work() {
 #[test]
 fn double_locking_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 5, WithdrawReasons::all());
@@ -164,7 +155,6 @@ fn double_locking_should_work() {
 #[test]
 fn combination_locking_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, u64::MAX, WithdrawReasons::empty());
@@ -176,7 +166,6 @@ fn combination_locking_should_work() {
 #[test]
 fn lock_value_extension_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 5, WithdrawReasons::all());
@@ -200,7 +189,6 @@ fn lock_value_extension_should_work() {
 #[test]
 fn lock_should_work_reserve() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			pallet_transaction_payment::NextFeeMultiplier::<Test>::put(
@@ -234,7 +222,6 @@ fn lock_should_work_reserve() {
 #[test]
 fn lock_should_work_tx_fee() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 10, WithdrawReasons::TRANSACTION_PAYMENT);
@@ -265,7 +252,6 @@ fn lock_should_work_tx_fee() {
 #[test]
 fn lock_block_number_extension_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 10, WithdrawReasons::all());
@@ -290,7 +276,6 @@ fn lock_block_number_extension_should_work() {
 #[test]
 fn lock_reasons_extension_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			Balances::set_lock(ID_1, &1, 10, WithdrawReasons::TRANSFER);
@@ -1309,7 +1294,6 @@ fn repatriate_all_reserved_named_should_work() {
 #[test]
 fn freezing_and_locking_should_work() {
 	ExtBuilder::default()
-		.existential_deposit(1)
 		.monied(true)
 		.build_and_execute_with(|| {
 			assert_ok!(<Balances as fungible::MutateFreeze<_>>::set_freeze(&TestId::Foo, &1, 4));
